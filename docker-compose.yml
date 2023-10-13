@@ -1,0 +1,23 @@
+version: '3'
+
+services:
+  nginx:
+    image: nginx:1.23.3-alpine
+    container_name: nginx
+    volumes:
+      - /var/log/nginx:/var/log/nginx
+      - ./conf.d:/etc/nginx/conf.d
+    restart: always
+    mem_limit: 1g
+    mem_reservation: 512m
+    logging:
+      options:
+        max-size: 1g
+    ports:
+      - 80:80
+      - 443:443
+    networks:
+      - dev
+networks:
+  dev:
+    name: dev
